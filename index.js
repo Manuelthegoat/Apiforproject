@@ -13,7 +13,7 @@ const fs = require('fs')
 const app = express()
 const salt = bycrypt.genSaltSync(10)
 const secret = 'yyeyeyyzsvgsggsgstgwtyteyy7wey'
-app.use(cors({ credentials: true, origin: 'http://localhost:3000' }))
+app.use(cors({ credentials: true, origin: 'https://manuelblog.vercel.app' }))
 app.use(express.json())
 app.use(cookieParser())
 app.use('/uploads', express.static(__dirname + '/uploads'))
@@ -93,9 +93,10 @@ app.post('/post', uploadMiddleware.single('file'), async (req, res) => {
         res.json(postDoc)
     })
 
-
-
 })
+
+
+
 
 app.get('/post', async (req, res) => {
     const posts = await Post.find().populate('author', ['username']).sort({ createdAt: -1 }).limit(20)
